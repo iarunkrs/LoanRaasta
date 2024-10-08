@@ -166,22 +166,37 @@ const Header = () => {
               >
                 <MenuItem onClick={handleMenuClose}>
                 <Link to="/personalloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Personal Loan
+                MSME Loan
                 </Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                 <Link to="/businessloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Business Loan
+                Project Loan
                 </Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                 <Link to="/professionalloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Professional Loan
+                Factory Loan with subsidy
                 </Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
                 <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Secure Loan
+                CC/OD Loan
+                </Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
+                Business Loan
+                </Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
+                Personal Loan
+                </Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
+                House Loan
                 </Link>
                 </MenuItem>
               </DropdownMenu>
