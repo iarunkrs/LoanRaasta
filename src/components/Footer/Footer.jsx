@@ -1,7 +1,7 @@
 import { Box, Typography, Link, IconButton, Container } from '@mui/material';
 import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
 import { styled } from '@mui/system';
-import logoImg from '../../assets/images/logoImg.png';
+import logoImg from '../../assets/images/logo-real.jpg';
 
 // Styled Typography for body2
 const StyledTypography = styled(Typography)(({ theme }) => ({
@@ -14,7 +14,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 const FooterContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#fff',
   color: '#fff',
-  padding: '5rem 0',
+  padding: '2rem 0 5rem 0',
   display: 'grid',
   gridTemplateColumns: '1fr',
   gap: '20px',
@@ -34,13 +34,13 @@ const FooterContainer = styled(Box)(({ theme }) => ({
 }));
 
 const Logo = styled('img')({
-  width: '150px',
+  width: '180px',
   marginBottom: '20px',
 });
 
 const Footer = () => {
   return (
-    <Box sx={{ backgroundColor: '#fff', pt:4, borderTop:'1px solid red' }}>
+    <Box sx={{ backgroundColor: '#fff', pt:4, borderTop:'1px solid gray' }}>
       {/* Footer Section */}
       <Container>
         <FooterContainer>
@@ -54,7 +54,7 @@ const Footer = () => {
 
           {/* Company Information Section */}
           <Box>
-            <Typography variant="h6" sx={{ color: '#000', fontFamily: 'Outfit', fontWeight: 700 }} gutterBottom>
+            <Typography variant="h5" sx={{ color: 'primary.main', fontWeight:'700'}} gutterBottom>
               Company
             </Typography>
             <StyledTypography>
@@ -81,7 +81,7 @@ const Footer = () => {
 
           {/* Legal Information Section */}
           <Box>
-            <Typography variant="h6" sx={{ color: '#000', fontFamily: 'Outfit', fontWeight: 700 }} gutterBottom>
+            <Typography variant="h5" sx={{ color: 'primary.main', fontWeight:'700'}}gutterBottom>
               Legal
             </Typography>
             <StyledTypography>
@@ -98,7 +98,7 @@ const Footer = () => {
 
           {/* Address and Social Links Section */}
           <Box>
-            <Typography variant="h6" sx={{ color: '#000', fontFamily: 'Outfit', fontWeight: 700 }} gutterBottom>
+            <Typography variant="h5" sx={{ color: 'primary.main', fontWeight:'700'}} gutterBottom>
               Address
             </Typography>
             <StyledTypography>
@@ -117,22 +117,22 @@ const Footer = () => {
       </Container>
 
       {/* Copyright Section */}
-      <Box sx={{ backgroundColor: '#222', color: '#aaa', textAlign: 'center', padding: '10px 0' }}>
-        <Typography variant="body2">
+      <Box sx={{ backgroundColor: 'primary.main', color: '#fff', textAlign: 'center', padding: '10px 0' }}>
+        <Typography variant="body2" sx={{ color:'#fff' }}>
           © {new Date().getFullYear()} LoanRaasta. All rights reserved.
         </Typography>
 
         <Box mt={2}>
-              <IconButton href="https://facebook.com" target="_blank" aria-label="Facebook" color="inherit">
+              <IconButton href="https://facebook.com" target="_blank" aria-label="Facebook" sx={{ color:'#fff' }}>
                 <Facebook />
               </IconButton>
-              <IconButton href="https://twitter.com" target="_blank" aria-label="Twitter" color="inherit">
+              <IconButton href="https://twitter.com" target="_blank" aria-label="Twitter" sx={{ color:'#fff' }}>
                 <Twitter />
               </IconButton>
-              <IconButton href="https://instagram.com" target="_blank" aria-label="Instagram" color="inherit">
+              <IconButton href="https://instagram.com" target="_blank" aria-label="Instagram" sx={{ color:'#fff' }}>
                 <Instagram />
               </IconButton>
-              <IconButton href="https://linkedin.com" target="_blank" aria-label="LinkedIn" color="inherit">
+              <IconButton href="https://linkedin.com" target="_blank" aria-label="LinkedIn" sx={{ color:'#fff' }}>
                 <LinkedIn />
               </IconButton>
             </Box>

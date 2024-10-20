@@ -45,7 +45,7 @@ const ContactUsPage = () => {
       <Box sx={{ padding: '4rem 2rem' }}>
         {/* Header Section */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1A4CFF' }} gutterBottom>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#6d72f6' }} gutterBottom>
             Contact Us
           </Typography>
           <Typography variant="body1" sx={{ mb: 2, color: '#333' }}>

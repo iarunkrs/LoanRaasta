@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import {
   Box,
-  Paper,
-  Grid,
   TextField,
-  Typography,
-  MenuItem,
   Button,
   FormControl,
   InputLabel,
   Select,
+  MenuItem,
+  Typography,
+  useTheme,
   Divider,
+  Container,
 } from "@mui/material";
+import queryImg from '../../assets/images/pexels-kindelmedia-7979597.jpg'
 
-function LoanQueryForm() {
+const LoanQueryForm = () => {
+  const theme = useTheme(); // Access the theme colors
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -33,281 +35,185 @@ function LoanQueryForm() {
     console.log("Form Submitted", formData);
   };
 
+  const textFieldStyles = {
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: theme.palette.primary.main,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.primary.dark,
+      },
+    },
+  };
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f5f5f5",
-        padding: "20px",
-      }}
-    >
-      <Paper
-        elevation={0}
-        sx={{
-          padding: "20px",
-          width: "80%",
-          borderRadius: "15px",
-          background: "linear-gradient(white, #e0f7fa)",
-          display: "flex",
-          flexDirection: "row",
-          gap: "20px",
-        }}
-      >
-        {/* Left side: Static Information */}
-        <Box sx={{ flex: 1, padding: "20px" }}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            sx={{ fontWeight: "bold", color: "#333" }}
-          >
-            Welcome to Our Loan Services
-          </Typography>
-          <Typography variant="body1" gutterBottom sx={{ marginBottom: "16px" }}>
-            We provide a range of loans tailored to your needs, whether you're
-            looking to start a business, buy a home, or need personal assistance.
-            With competitive interest rates, flexible repayment options, and fast
-            approval processes, we are here to help you achieve your financial
-            goals.
-          </Typography>
-          <Divider />
-          <Typography
-            variant="h6"
-            gutterBottom
-            sx={{ marginTop: "16px", fontWeight: "bold" }}
-          >
-            Why Choose Us?
-          </Typography>
-          <ul style={{ lineHeight: "2em" }}>
-            <li>Low and Competitive Interest Rates</li>
-            <li>Flexible Loan Tenures</li>
-            <li>Fast Loan Approval Process</li>
-            <li>No Hidden Charges</li>
-            <li>24/7 Customer Support</li>
-          </ul>
-          <Divider />
-          <Typography
-            variant="h6"
-            gutterBottom
-            sx={{ marginTop: "16px", fontWeight: "bold" }}
-          >
-            Key Loan Features:
-          </Typography>
-          <ul style={{ lineHeight: "2em" }}>
-            <li>Loans starting from ₹5 lakh up to ₹100 crores</li>
-            <li>Interest rates starting from 7% per annum</li>
-            <li>Tenures ranging from 6 months to 20 years</li>
-            <li>Minimal documentation required</li>
-            <li>Secure and transparent process</li>
-          </ul>
+    <Box>
+      <Container>
+        <Box
+          sx={{
+            textAlign: "left",
+            mt: 6,
+            marginBottom: "4rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1.5rem",
+          }}
+        >
+          <Divider
+            sx={{
+              height: "5px",
+              backgroundColor: `${theme.palette.primary.main}`,
+              width: "100px",
+            }}
+          />
+
+          <Typography variant="h3">Loan Query Form</Typography>
         </Box>
-
-        {/* Right side: Loan Query Form */}
-        <Box sx={{ flex: 1, padding: "20px" }}>
-          <Typography
-            variant="h5"
-            gutterBottom
-            align="center"
-            sx={{ fontWeight: "bold", marginBottom: "20px" }}
+        <Container sx={{ position:'relative' }}>
+          <Box sx={{ position:'absolute', width:'35%', top:'0', bottom:'0', right:'0', left:'auto', backgroundColor:'primary.main',zIndex:'-1', display:{xs:'none', md:'block'} }}></Box>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "1fr 1fr",
+              },
+              padding: "20px",
+              gap: "5rem",
+            }}
           >
-            Loan Query Form
-          </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{
+                display: "grid",
+                gap: "16px",
+                gridTemplateColumns: "1fr",
+                width: "100%",
+              }}
+            >
+              <TextField
+                required
+                fullWidth
+                label="Full Name"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                variant="outlined"
+                sx={textFieldStyles}
+              />
 
-          <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Full Name"
-                  name="fullName"
-                  value={formData.fullName}
+              <TextField
+                required
+                fullWidth
+                type="email"
+                label="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                variant="outlined"
+                sx={textFieldStyles}
+              />
+
+              <TextField
+                required
+                fullWidth
+                type="tel"
+                label="Contact Number"
+                name="contactNumber"
+                value={formData.contactNumber}
+                onChange={handleChange}
+                variant="outlined"
+                inputProps={{ maxLength: 10 }}
+                sx={textFieldStyles}
+              />
+
+              <FormControl fullWidth variant="outlined" required>
+                <InputLabel>Loan Type</InputLabel>
+                <Select
+                  label="Loan Type"
+                  name="loanType"
+                  value={formData.loanType}
                   onChange={handleChange}
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      "&:hover fieldset": {
-                        borderColor: "#00796b", // Custom color on hover
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#004d40", // Custom color on focus
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  type="email"
-                  label="Email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      "&:hover fieldset": {
-                        borderColor: "#00796b",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#004d40",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  type="tel"
-                  label="Contact Number"
-                  name="contactNumber"
-                  value={formData.contactNumber}
-                  onChange={handleChange}
-                  variant="outlined"
-                  inputProps={{ maxLength: 10 }}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      "&:hover fieldset": {
-                        borderColor: "#00796b",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#004d40",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <FormControl fullWidth variant="outlined" required>
-                  <InputLabel>Loan Type</InputLabel>
-                  <Select
-                    label="Loan Type"
-                    name="loanType"
-                    value={formData.loanType}
-                    onChange={handleChange}
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        "&:hover fieldset": {
-                          borderColor: "#00796b",
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#004d40",
-                        },
-                      },
-                    }}
-                  >
-                    <MenuItem value="Personal Loan">Personal Loan</MenuItem>
-                    <MenuItem value="Home Loan">Home Loan</MenuItem>
-                    <MenuItem value="Car Loan">Car Loan</MenuItem>
-                    <MenuItem value="Education Loan">Education Loan</MenuItem>
-                    <MenuItem value="Business Loan">Business Loan</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  type="number"
-                  label="Loan Amount (₹)"
-                  name="loanAmount"
-                  value={formData.loanAmount}
-                  onChange={handleChange}
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      "&:hover fieldset": {
-                        borderColor: "#00796b",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#004d40",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  type="number"
-                  label="Tenure (in months)"
-                  name="tenure"
-                  value={formData.tenure}
-                  onChange={handleChange}
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      "&:hover fieldset": {
-                        borderColor: "#00796b",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#004d40",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  multiline
-                  rows={4}
-                  label="Additional Information"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  variant="outlined"
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      "&:hover fieldset": {
-                        borderColor: "#00796b",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#004d40",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12} sx={{ textAlign: "center" }}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  sx={{
-                    padding: "10px 20px",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                    backgroundColor: "#00796b",
-                    transition: "background-color 0.3s",
-                    "&:hover": {
-                      backgroundColor: "#004d40",
-                    },
-                  }}
+                  sx={textFieldStyles}
                 >
-                  Submit Query
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        </Box>
-      </Paper>
+                  <MenuItem value="Personal Loan">Personal Loan</MenuItem>
+                  <MenuItem value="Home Loan">Home Loan</MenuItem>
+                  <MenuItem value="Car Loan">Car Loan</MenuItem>
+                  <MenuItem value="Education Loan">Education Loan</MenuItem>
+                  <MenuItem value="Business Loan">Business Loan</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                required
+                fullWidth
+                type="number"
+                label="Loan Amount (₹)"
+                name="loanAmount"
+                value={formData.loanAmount}
+                onChange={handleChange}
+                variant="outlined"
+                sx={textFieldStyles}
+              />
+
+              <TextField
+                required
+                fullWidth
+                type="number"
+                label="Tenure (in months)"
+                name="tenure"
+                value={formData.tenure}
+                onChange={handleChange}
+                variant="outlined"
+                sx={textFieldStyles}
+              />
+
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                label="Additional Information"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                variant="outlined"
+                sx={textFieldStyles}
+              />
+
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  padding: "10px 20px",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                  backgroundColor: theme.palette.primary.main,
+                  transition: "background-color 0.3s",
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.dark,
+                  },
+                }}
+              >
+                Submit Query
+              </Button>
+            </Box>
+
+            <Box>
+              <Box
+                component={"img"}
+                src={queryImg}
+                alt=""
+                sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
+            </Box>
+          </Box>
+        </Container>
+      </Container>
     </Box>
   );
-}
+};
 
 export default LoanQueryForm;

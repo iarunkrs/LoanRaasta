@@ -1,62 +1,114 @@
 import React from "react";
-import { Box, Typography, Container, CardMedia, CardContent, CardActions, Button, Card } from "@mui/material";
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { Box, Typography, Container, Button, Divider, useTheme } from "@mui/material";
+import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
+import { styled } from '@mui/system';
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  border: 'none',
+  background: theme.palette.background.default, // Use a background color
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center', // Center the content
+  padding: '0.5rem 1rem', // Add padding for better size
+  transition: 'background-color 0.3s, color 0.3s, transform 0.3s',
+  '&:hover': {
+    backgroundColor: theme.palette.primary.dark,
+    color: 'white',
+    transform: 'scale(1.05)', // Slightly enlarge the button on hover
+  },
+}));
 
 const BlogSection = ({ blogs }) => {
+  const theme = useTheme();
+
   return (
-    <Box sx={{ textAlign: "center", marginTop: "3rem", mb: 5 }}>
-      <Typography variant="h4" component="h2" sx={{ marginBottom: "2rem", fontWeight: "bold" }}>
-        Latest Blogs
-      </Typography>
+    <Box sx={{ textAlign: "center", marginTop: "3rem", mb: 5, backgroundColor: "#f9f9f9", padding: "2rem 0" }}>
       <Container>
         <Box
           sx={{
+            textAlign: "center",
+            marginBottom: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          <Divider
+            sx={{
+              height: "5px",
+              backgroundColor: `${theme.palette.primary.main}`,
+              width: "100px",
+              marginBottom: "1rem",
+            }}
+          />
+          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+            Latest Blogs
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Stay updated with our latest articles and insights
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr" },
             gap: "2rem",
           }}
         >
           {blogs.map((blog, index) => (
-            <Card
+            <Box
               key={index}
               sx={{
-                cursor: "pointer",
+                borderBottom: `4px solid ${theme.palette.primary.main}`,
+                borderLeft: '1px solid #d8dce7',
+                borderRight: '1px solid #d8dce7',
+                borderTop: '1px solid #d8dce7',
+                overflow: "hidden",
+                backgroundColor: "white",
                 transition: "transform 0.3s, box-shadow 0.3s",
                 "&:hover": {
-                  transform: "scale(1.05)",
-                  boxShadow: "0px 4px 20px rgba(0,0,0,0.15)"
+                  transform: "scale(1.02)",
                 },
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "100%",
-                borderRadius: "10px",
-                overflow: "hidden",
               }}
             >
-              <CardMedia component="img" height="140" image={blog.image} alt={blog.title} />
-              <CardContent sx={{ height: '150px' }}>
-                <Typography gutterBottom variant="h6" component="h4" sx={{ fontWeight: "bold" }}>
+              <Box
+                component="img"
+                src={blog.image}
+                alt={blog.title}
+                sx={{
+                  width: "100%",
+                  height: "200px",
+                  objectFit: "cover",
+                }}
+              />
+              <Box sx={{ padding: "1.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between",  }}>
+                <Typography variant="h5" component="h4" sx={{ fontWeight: "bold", textAlign: 'left', mb:2 }}>
                   {blog.title}
                 </Typography>
-                <Typography
+                {/* Uncomment if you want to show the date */}
+                {/* <Typography
                   variant="body2"
-                  color="#000"
+                  color="text.secondary"
                   sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}
                 >
                   <AccessTimeIcon fontSize="small" sx={{ marginRight: "0.5rem" }} />
                   {blog.date}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
+                </Typography> */}
+                <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'left', flexGrow: 1 }}>
                   {blog.description}
                 </Typography>
-              </CardContent>
-              <CardActions sx={{ justifyContent: "center", paddingBottom: "1rem" }}>
-                <Button size="small" color="primary" sx={{ fontWeight: "bold" }}>
-                  Read More
-                </Button>
-              </CardActions>
-            </Card>
+                <Box sx={{ mt:2}}>
+                <StyledButton>
+                Apply Now
+                <TrendingFlatIcon sx={{ marginLeft: '0.5rem' }} />
+              </StyledButton>
+                </Box>
+              </Box>
+              
+            </Box>
           ))}
         </Box>
 

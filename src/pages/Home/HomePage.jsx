@@ -19,19 +19,23 @@ import {
 import EmiCalculator from "./EmiCalculator";
 import LoanQueryForm from "./LoanQueryForm";
 import EligibilityChecker from "./EligibilityChecker";
+import Banner from "../../components/Banner/Banner";
+import WhyChooseUs from "./WhyChooseUs";
+import StickyContactSection from "../../components/StickContactSection/StickyContactSection";
 
 const HomePage = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       {/* Slider Section */}
-      <Slider />
+      {/* <Slider /> */}
+      <Banner />
 
       {/* Trending Loans Section */}
       <TrendingLoans loanData={loanData} />
 
       <EmiCalculator />
 
-      <EligibilityChecker/>
+      <EligibilityChecker />
 
       {/* Loan Sections with Alternating Layout */}
       <LoanSection loanSections={loanSections} />
@@ -39,12 +43,19 @@ const HomePage = () => {
       {/* Loan Provision Walkthrough - How It Works */}
       <ProcessSteps processSteps={processSteps} />
 
+      {/* Why Choose Us */}
+      <WhyChooseUs />
+
+      {/* Loan Query */}
       <LoanQueryForm />
+
       {/* Blog Section */}
       <BlogSection blogs={blogs} />
 
       {/* Banks Associated with Us */}
       <BankLogos bankLogos={bankLogos} />
+
+      <StickyContactSection />
     </Box>
   );
 };

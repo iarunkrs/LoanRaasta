@@ -1,202 +1,305 @@
 import React, { useState } from "react";
-import { Slider, Typography, Box, Grid, Paper } from "@mui/material";
-import GaugeChart from "react-gauge-chart";
+import {
+  Container,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  Slider,
+  Box,
+  Divider,
+  TextField,
+  useTheme,
+} from "@mui/material";
+import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
-function EmiCalculator() {
-  const [loanAmount, setLoanAmount] = useState(500000); // Initial loan amount
-  const [interestRate, setInterestRate] = useState(7); // Initial interest rate
-  const [tenure, setTenure] = useState(12); // Initial tenure in months
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-  // Function to calculate EMI
-  const calculateEMI = (loanAmount, interestRate, tenure) => {
-    const monthlyInterestRate = interestRate / (12 * 100);
-    const emi =
-      (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, tenure)) /
-      (Math.pow(1 + monthlyInterestRate, tenure) - 1);
-    return emi.toFixed(2);
-  };
+const sliderFlex = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: '1rem',
+  width: '100%'
+};
 
-  // Function to calculate total payment
-  const totalPayment = (emi, tenure) => (emi * tenure).toFixed(2);
-
-  const emi = calculateEMI(loanAmount, interestRate, tenure);
-  const totalInterest = (emi * tenure - loanAmount).toFixed(2);
-  const totalPayable = totalPayment(emi, tenure);
-
-  // To get EMI percentage for Gauge (normalized value for gauge chart)
-  const emiPercentage = Math.min((emi / loanAmount) * 100, 100) / 100;
-
-  return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        padding: "20px",
-        backgroundColor: "#f0f0f0",
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Grid container spacing={4} sx={{ width: "90%" }}>
-        {/* Left Side: Calculator */}
-        <Grid item xs={12} md={6}>
-          <Paper
-            elevation={10}
-            sx={{
-              padding: "40px",
-              borderRadius: "15px",
-              backgroundColor: "#ffffff",
-            }}
-          >
-            <Typography
-              variant="h4"
-              gutterBottom
-              align="center"
-              sx={{
-                fontFamily: "'Roboto', sans-serif",
-                fontWeight: "bold",
-                color: "#333",
-                marginBottom: "20px",
-              }}
-            >
-              EMI Calculator
-            </Typography>
-
-            {/* Loan Amount Slider */}
-            <Typography
-              gutterBottom
-              sx={{ fontWeight: "bold", fontSize: "18px" }}
-            >
-              Loan Amount: ₹{loanAmount.toLocaleString()}
-            </Typography>
-            <Slider
-              value={loanAmount}
-              onChange={(e, value) => setLoanAmount(value)}
-              min={100000}
-              max={10000000}
-              step={10000}
-              valueLabelDisplay="auto"
-              marks={[
-                { value: 100000, label: "₹1L" },
-                { value: 10000000, label: "₹1Cr" },
-              ]}
-              sx={{
-                mb: 3,
-                color: "blue",
-              }}
-            />
-
-            {/* Interest Rate Slider */}
-            <Typography
-              gutterBottom
-              sx={{ fontWeight: "bold", fontSize: "18px" }}
-            >
-              Interest Rate: {interestRate}%
-            </Typography>
-            <Slider
-              value={interestRate}
-              onChange={(e, value) => setInterestRate(value)}
-              min={5}
-              max={20}
-              step={0.1}
-              valueLabelDisplay="auto"
-              marks={[
-                { value: 5, label: "5%" },
-                { value: 20, label: "20%" },
-              ]}
-              sx={{
-                mb: 3,
-                color: "green",
-              }}
-            />
-
-            {/* Tenure Slider */}
-            <Typography
-              gutterBottom
-              sx={{ fontWeight: "bold", fontSize: "18px" }}
-            >
-              Tenure: {tenure} months
-            </Typography>
-            <Slider
-              value={tenure}
-              onChange={(e, value) => setTenure(value)}
-              min={6}
-              max={240}
-              step={1}
-              valueLabelDisplay="auto"
-              marks={[
-                { value: 6, label: "6m" },
-                { value: 240, label: "20y" },
-              ]}
-              sx={{
-                mb: 3,
-                color: "red",
-              }}
-            />
-
-            {/* EMI Result */}
-            <Box mt={4} mb={2} sx={{ textAlign: "center" }}>
-              <Typography
-                variant="h5"
-                sx={{ fontWeight: "bold", color: "#333" }}
-              >
-                Your Monthly EMI: ₹{emi}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ color: "#555", marginTop: "10px" }}
-              >
-                Total Payable Amount: ₹{totalPayable}
-              </Typography>
-              <Typography variant="body1" sx={{ color: "#555" }}>
-                Total Interest Payable: ₹{totalInterest}
-              </Typography>
-            </Box>
-          </Paper>
-        </Grid>
-
-        {/* Right Side: Odometer-like Gauge Chart */}
-        <Grid item xs={12} md={6}>
-          <Paper
-            elevation={10}
-            sx={{
-              padding: "20px",
-              borderRadius: "15px",
-              backgroundColor: "#ffffff",
-              textAlign: "center",
-            }}
-          >
-            <Typography
-              variant="h5"
-              gutterBottom
-              sx={{
-                fontFamily: "'Roboto', sans-serif",
-                fontWeight: "bold",
-                color: "#333",
-              }}
-            >
-              EMI Gauge Representation
-            </Typography>
-
-            {/* Gauge Chart for EMI */}
-            <GaugeChart
-              id="emi-gauge-chart"
-              nrOfLevels={20}
-              percent={emiPercentage}
-              textColor="#333"
-              formatTextValue={() => `₹${emi}`}
-              colors={["#FF5F6D", "#FFC371"]}
-              arcWidth={0.3}
-              arcPadding={0.02}
-              needleColor="#464A4F"
-              needleBaseColor="#464A4F"
-            />
-          </Paper>
-        </Grid>
-      </Grid>
-    </Box>
-  );
+const inputStyle = {
+  // padding: '5px 10px', 
+  fontSize: '12px',
+  '& .MuiFormControl-root.MuiTextField-root': {
+    padding: '0px',
+  },
+  '& .MuiInputBase-root': {
+    padding: '0px',
+  },
+  '& .MuiInputBase-input': {
+    padding: '5px 10px',
+    fontSize: '12px',
+  },
 }
 
-export default EmiCalculator;
+const LoanCalculator = () => {
+  const theme = useTheme();
+  const [amount, setAmount] = useState(100000); // Updated minimum loan amount
+  const [interestRate, setInterestRate] = useState(5); // Default interest rate
+  const [tenure, setTenure] = useState(1); // Default loan tenure in years
+  const [monthlyPayment, setMonthlyPayment] = useState(null);
+  const [chartData, setChartData] = useState({
+    labels: ["Principal Amount", "Interest Amount"],
+    datasets: [
+      {
+        data: [50, 50], // Default 50-50 values
+        backgroundColor: ["#4caf50", "#ff6384"],
+        hoverBackgroundColor: ["#45a049", "#ff4d4d"],
+      },
+    ],
+  });
+
+  // Utility function to format numbers with commas
+  const formatNumber = (num) => {
+    return num.toLocaleString("en-IN");
+  };
+
+  const calculateMonthlyPayment = () => {
+    const principal = parseFloat(amount);
+    const calculatedInterest = parseFloat(interestRate) / 100 / 12;
+    const calculatedPayments = parseFloat(tenure) * 12;
+
+    const x = Math.pow(1 + calculatedInterest, calculatedPayments);
+    const monthly = (principal * x * calculatedInterest) / (x - 1);
+    const totalPayment = monthly * calculatedPayments; // Total payment over the loan period
+    const interestAmount = totalPayment - principal; // Total interest paid
+
+    if (!isNaN(monthly) && monthly !== Infinity && monthly > 0) {
+      setMonthlyPayment({
+        emi: monthly.toFixed(2),
+        principal: principal,
+        interest: interestAmount.toFixed(2),
+        total: totalPayment.toFixed(2),
+        tenure: tenure,
+      });
+
+      // Update the chart data with actual principal and interest values
+      setChartData({
+        labels: ["Principal Amount", "Interest Amount"],
+        datasets: [
+          {
+            data: [principal, interestAmount], // Updated values
+            backgroundColor: ["#4caf50", "#ff6384"],
+            hoverBackgroundColor: ["#45a049", "#ff4d4d"],
+          },
+        ],
+      });
+    } else {
+      setMonthlyPayment(null);
+    }
+  };
+
+  const handleAmountChange = (e) => {
+    const newAmount = Math.max(100000, Math.min(10000000, parseInt(e.target.value.replace(/,/g, "")))); // Remove commas for calculation
+    setAmount(newAmount);
+  };
+
+  const handleInterestChange = (e) => {
+    const newRate = Math.max(1, Math.min(20, e.target.value));
+    setInterestRate(newRate);
+  };
+
+  const handleTenureChange = (e) => {
+    const newTenure = Math.max(1, Math.min(30, e.target.value));
+    setTenure(newTenure);
+  };
+
+  return (
+    <Box>
+      <Container>
+        <Box
+          sx={{
+            textAlign: "left",
+            mt: 6,
+            marginBottom: "4rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1.5rem",
+          }}
+        >
+          <Divider
+            sx={{
+              height: "5px",
+              backgroundColor: `${theme.palette.primary.main}`,
+              width: "100px",
+            }}
+          />
+          <Typography variant="h3">Loan Calculator</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              md: "1fr 1fr",
+            },
+            gap: "4rem",
+            width: "100%",
+            alignItems: 'flex-start'
+          }}
+        >
+          <Box sx={{ width: "100%", display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {/* Loan Amount Slider and Input */}
+            <Box>
+              <Box sx={{ ...sliderFlex, mb: 1 }}>
+                <Typography>Loan Amount:</Typography>
+                <TextField
+                  type="text"
+                  value={formatNumber(amount)}
+                  onChange={handleAmountChange}
+                  sx={{ width: "150px", ...inputStyle }}
+                />
+              </Box>
+              <Slider
+                value={amount}
+                onChange={(e, newValue) => setAmount(newValue)}
+                min={100000}
+                max={10000000}
+                step={1000}
+                valueLabelDisplay="auto"
+              />
+              <Box display="flex" justifyContent="space-between">
+                <Typography>₹1,00,000</Typography>
+                <Typography>₹1,00,00,000</Typography>
+              </Box>
+            </Box>
+
+            {/* Interest Rate Slider and Input */}
+            <Box>
+              <Box sx={{ ...sliderFlex, mb: 1 }}>
+                <Typography>Interest Rate (%):</Typography>
+                <TextField
+                  type="number"
+                  value={interestRate}
+                  onChange={handleInterestChange}
+                  inputProps={{ min: 1, max: 20, step: 0.1 }}
+                  sx={{ width: "150px", ...inputStyle }}
+                />
+              </Box>
+              <Slider
+                value={interestRate}
+                onChange={(e, newValue) => setInterestRate(newValue)}
+                min={1}
+                max={20}
+                step={0.1}
+                valueLabelDisplay="auto"
+              />
+              <Box display="flex" justifyContent="space-between">
+                <Typography>1%</Typography>
+                <Typography>20%</Typography>
+              </Box>
+            </Box>
+
+            {/* Loan Tenure Slider and Input */}
+            <Box>
+              <Box sx={{ ...sliderFlex, mb: 1 }}>
+                <Typography>Loan Tenure (Years):</Typography>
+                <TextField
+                  type="number"
+                  value={tenure}
+                  onChange={handleTenureChange}
+                  inputProps={{ min: 1, max: 30 }}
+                  sx={{ width: "150px", ...inputStyle }}
+                />
+              </Box>
+              <Slider
+                value={tenure}
+                onChange={(e, newValue) => setTenure(newValue)}
+                min={1}
+                max={30}
+                step={1}
+                valueLabelDisplay="auto"
+              />
+              <Box display="flex" justifyContent="space-between">
+                <Typography>1 Year</Typography>
+                <Typography>30 Years</Typography>
+              </Box>
+            </Box>
+
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={calculateMonthlyPayment}
+              fullWidth
+              sx={{ marginTop: 2 }}
+            >
+              Calculate
+            </Button>
+          </Box>
+
+          {/* Right Section: Always visible */}
+          <Box sx={{ width: "100%" }}>
+            <Card variant="outlined" sx={{}}>
+              <CardContent>
+                <Typography variant="h6" align="center">
+                  Loan Summary
+                </Typography>
+                <Box
+                  display="grid"
+                  gridTemplateColumns="repeat(2, 1fr)"
+                  gap={2}
+                  sx={{ marginTop: 2 }}
+                >
+                  <Box>
+                    <Typography variant="body1">Monthly EMI:</Typography>
+                    <Typography variant="h5" color="primary">
+                      {monthlyPayment ? `₹${monthlyPayment.emi}` : "-----"}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body1">Principal Amount:</Typography>
+                    <Typography variant="h5" color="primary">
+                      {monthlyPayment
+                        ? `₹${formatNumber(monthlyPayment.principal)}`
+                        : "-----"}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body1">Interest Amount:</Typography>
+                    <Typography variant="h5" color="primary">
+                      {monthlyPayment ? `₹${formatNumber(monthlyPayment.interest)}` : "-----"}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body1">Total Amount:</Typography>
+                    <Typography variant="h5" color="primary">
+                      {monthlyPayment ? `₹${formatNumber(monthlyPayment.total)}` : "-----"}
+                    </Typography>
+                  </Box>
+                  <Box gridColumn="span 2">
+                    <Typography variant="body1">Loan Tenure:</Typography>
+                    <Typography variant="h5" color="primary">
+                      {monthlyPayment
+                        ? `${monthlyPayment.tenure} year(s)`
+                        : "-----"}
+                    </Typography>
+                  </Box>
+                </Box>
+              </CardContent>
+            </Card>
+
+            <Box sx={{ width: '200px', height: '200px', margin: '0 auto' }}>
+              <Doughnut
+                data={chartData}
+                options={{
+                  maintainAspectRatio: false, 
+                }}
+              />
+            </Box>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  );
+};
+
+export default LoanCalculator;

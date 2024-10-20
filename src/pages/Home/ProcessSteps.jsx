@@ -1,8 +1,19 @@
-// src/components/ProcessSteps.js
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Divider, Typography, useTheme, Collapse, IconButton, Container } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import dummyImg from '../../assets/images/pexels-khwanchai-12885861.jpg';
 
-const ProcessSteps = ({ processSteps }) => {
+const ProcessSteps = ({ processSteps = [] }) => {
+  const theme = useTheme();
+  const [expandedStep, setExpandedStep] = useState(null); // No step expanded initially
+
+  const handleStepClick = (index) => {
+    setExpandedStep(expandedStep === index ? null : index);
+  };
+
+  const placeholderImage = dummyImg; // Use the imported dummy image directly
+
   return (
     <Box
       sx={{
@@ -10,120 +21,115 @@ const ProcessSteps = ({ processSteps }) => {
         marginTop: "3rem",
         position: "relative",
         paddingBottom: "3rem",
+        overflow:'hidden'
       }}
     >
-      <Typography variant="h4" component="h2" sx={{ marginBottom: "2rem" }}>
-        Loan Rasta For You
-      </Typography>
-
-      {/* Road and Milestones */}
-      <Box
-        sx={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "1000px",
-          margin: "0 auto",
-        }}
-      >
-        {/* Road (Visible CSS road) */}
+      <Box sx={{ display:{xs:'none', md:'block'}, position:'absolute', backgroundColor:'primary.main', width:'200px', height:'100%', left:'0', top:'10px' }}></Box>
+      <Container>
+      
         <Box
           sx={{
-            position: "absolute",
-            top: "50%",
-            left: "0",
-            right: "0",
-            height: "8px", // Increased height for better visibility
-            backgroundColor: "#757575", // Darker road color
-            "&::before": {
-              content: '""',
-              position: "absolute",
-              top: "0",
-              left: "0",
-              right: "0",
-              width: "100%",
-              height: "8px", // Match the height of the road
-              backgroundImage: "linear-gradient(to right, #fff 25%, transparent 25%)",
-              backgroundSize: "40px 8px", // Adjust for larger dash marks
-              zIndex: 2,
-            },
+            textAlign: "left",
+            mt: 6,
+            marginBottom: "4rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1.5rem",
           }}
-        />
+        >
+          <Divider
+            sx={{
+              height: "5px",
+              backgroundColor: `${theme.palette.primary.main}`,
+              width: "100px",
+            }}
+          />
+          <Typography variant="h3">Loan Rasta For You</Typography>
+        </Box>
 
-        {/* Milestones */}
+        {/* Grid Layout */}
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" }, 
+            alignItems: 'center',
             gap: "2rem",
             position: "relative",
-            zIndex: 3, // Ensure milestones are on top of the road
+            boxSizing: 'border-box',
           }}
         >
-          {processSteps.map((step, index) => (
+          {/* Left Side Image */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#f5f5f5",
+              padding: "1rem",
+              // borderRadius: "8px",
+              // boxShadow: "0px 4px 15px rgba(0,0,0,0.1)",
+            }}
+          >
             <Box
-              key={index}
+              component="img"
+              src={expandedStep !== null ? processSteps[expandedStep]?.icon : placeholderImage} // Display placeholder by default, change on click
+              alt={expandedStep !== null ? processSteps[expandedStep]?.title : "Placeholder"}
               sx={{
-                position: "relative",
-                backgroundColor: "#f5f5f5",
-                padding: "2rem",
-                borderRadius: "8px",
-                textAlign: "center",
-                boxShadow: "0px 4px 15px rgba(0,0,0,0.1)",
-                transition: "transform 0.3s, box-shadow 0.3s",
-                cursor: "pointer",
-                "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow: "0px 4px 20px rgba(0,0,0,0.2)",
-                },
+                width: "100%",
+                // height: "auto",
+
+                // maxWidth: "350px", 
+                height:'400px',
+                objectFit:'contain'
               }}
-            >
-              {/* Icon */}
-              <Box
-                component="img"
-                src={step.icon}
-                alt={step.title}
-                sx={{
-                  width: "80px",
-                  margin: "0 auto 1rem",
-                  backgroundColor: "#fff",
-                  borderRadius: "50%",
-                  padding: "10px",
-                  border: "2px solid #ccc",
-                }}
-              />
+            />
+          </Box>
 
-              {/* Title and Description */}
-              <Typography variant="h6" component="h3" sx={{ marginBottom: "1rem" }}>
-                {index + 1}st Milestone: {step.title}
-              </Typography>
-              <Typography variant="body1">{step.description}</Typography>
-
-              {/* Step Marker */}
+          {/* Right Side Steps */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              justifyContent: "flex-start",
+            }}
+          >
+            {processSteps.map((step, index) => (
               <Box
+                key={index}
                 sx={{
-                  position: "absolute",
-                  top: "-30px", // Position marker above the milestone
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "#1976D2",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#fff",
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                  zIndex: 1,
+                  backgroundColor: "#f5f5f5",
+                  padding: "1rem",
+                  cursor: "pointer",
+                  borderBottom: `4px solid ${theme.palette.primary.main}`,
+                  borderLeft: '1px solid #d8dce7',
+                  borderRight: '1px solid #d8dce7',
+                  borderTop: '1px solid #d8dce7',
+                  transition: "transform 0.3s, box-shadow 0.3s",
+                  "&:hover": {
+                    transform: "translateY(-5px)",
+                  },
                 }}
+                onClick={() => handleStepClick(index)}
               >
-                {index + 1}
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <Typography variant="h6" component="h3" sx={{ marginBottom: "1rem", textAlign: 'left' }}>
+                    {step.title}
+                  </Typography>
+                  <IconButton>
+                    {expandedStep === index ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  </IconButton>
+                </Box>
+                <Collapse in={expandedStep === index}>
+                  <Typography variant="body1" sx={{ textAlign: 'left' }}>{step.description}</Typography>
+                </Collapse>
               </Box>
-            </Box>
-          ))}
+            ))}
+          </Box>
         </Box>
-      </Box>
+      </Container>
     </Box>
   );
 };

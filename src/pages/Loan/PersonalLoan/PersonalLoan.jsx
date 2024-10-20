@@ -199,7 +199,7 @@ const PersonalLoan = () => {
           py: '12px', 
           borderRadius: '25px', 
           fontSize: '1rem', 
-          backgroundColor: '#1A4CFF', 
+          backgroundColor: '#6d72f6', 
           '&:hover': { 
             backgroundColor: '#0031CC' 
           } 
@@ -237,7 +237,7 @@ const PersonalLoan = () => {
 
       {/* Features & Benefits Section */}
       <Box sx={{ padding: '40px 20px', background: `linear-gradient(135deg, ${featuresBenefitsData.gradientColors[0]} 0%, ${featuresBenefitsData.gradientColors[1]} 100%)`, borderRadius: '10px' }}>
-      <Typography variant="h4" sx={{ textAlign: 'center', marginBottom: '20px', color: '#1A4CFF', fontWeight: 'bold' }}>
+      <Typography variant="h4" sx={{ textAlign: 'center', marginBottom: '20px', color: '#6d72f6', fontWeight: 'bold' }}>
         {featuresBenefitsData.heading}
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: '20px', justifyContent: 'center' }}>
@@ -279,7 +279,7 @@ const PersonalLoan = () => {
 
       {/* Eligibility Section */}
       <Box sx={{ padding: '40px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f5f5f5' }}>
-      <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1A4CFF', marginBottom: '40px' }}>
+      <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#6d72f6', marginBottom: '40px' }}>
         {eligibilityData.heading}
       </Typography>
 
@@ -580,7 +580,7 @@ const PersonalLoan = () => {
               }}
             >
               <img src={step.img} alt={`Step ${step.step}`} style={{ marginBottom: '15px', width: '80px', height: '80px', objectFit: 'cover' }} />
-              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#1A4CFF', marginBottom: '10px' }}>Step {step.step}</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#6d72f6', marginBottom: '10px' }}>Step {step.step}</Typography>
               <Typography sx={{ lineHeight: 1.6 }}>{step.text}</Typography>
             </Box>
           ))}
@@ -595,7 +595,7 @@ const PersonalLoan = () => {
             marginLeft: 'auto', 
             marginRight: 'auto', 
             padding: '12px 40px', 
-            backgroundColor: '#1A4CFF', 
+            backgroundColor: '#6d72f6', 
             '&:hover': { backgroundColor: '#0031CC' } 
           }}
         >
@@ -667,7 +667,7 @@ const PersonalLoan = () => {
                   width: '100%', 
                   // borderRadius: '25px',
                   padding: '10px',
-                  backgroundColor: '#1A4CFF',
+                  backgroundColor: '#6d72f6',
                   '&:hover': { backgroundColor: '#0031CC' }
                 }}
               >

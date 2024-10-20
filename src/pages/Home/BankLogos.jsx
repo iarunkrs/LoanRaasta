@@ -1,19 +1,40 @@
 import React from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Divider, Typography, useTheme } from "@mui/material";
 
 const BankLogos = ({ bankLogos }) => {
+  const theme = useTheme();
   return (
     <Box sx={{ marginTop: "3rem", padding: "2rem 0", backgroundColor: "#f5f5f5" }}>
-      <Container>
-        <Typography variant="h4" component="h2" sx={{ textAlign: "center", marginBottom: "2rem", fontWeight: "bold" }}>
+      <Container>        
+        <Box
+          sx={{
+            textAlign: "center",
+            marginBottom: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          <Divider
+            sx={{
+              height: "5px",
+              backgroundColor: `${theme.palette.primary.main}`,
+              width: "100px",
+              marginBottom: "1rem",
+            }}
+          />
+          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
           Banks Associated with Us
-        </Typography>
+          </Typography>
+        </Box>
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "repeat(3, 1fr)", md: "repeat(5, 1fr)" },
+            gridTemplateColumns: { xs: "repeat(3, 1fr)", md: "repeat(7, 1fr)" },
             gap: "2rem",
             justifyContent: "center",
+            mt:'5rem'
           }}
         >
           {bankLogos.map((logo, index) => (

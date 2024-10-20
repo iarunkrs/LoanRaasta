@@ -53,7 +53,7 @@ const Testimonials = () => {
           textAlign: "center",
           marginTop: "3rem",
           padding: "4rem 0",
-          background: "linear-gradient(90deg, #1A4CFF 0%, #FF5722 100%)", // Gradient Background
+          background: "linear-gradient(90deg, #6d72f6 0%, #FF5722 100%)", // Gradient Background
         }}
       >
         <Typography
@@ -102,7 +102,7 @@ const Testimonials = () => {
                     sx={{
                       width: "100px",
                       height: "100px",
-                      border: "4px solid #1A4CFF",
+                      border: "4px solid #6d72f6",
                       boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.2)",
                     }}
                   />

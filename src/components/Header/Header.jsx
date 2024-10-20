@@ -1,288 +1,228 @@
-import { useState } from 'react';
-import { AppBar, Toolbar, Box, Button, IconButton, Drawer, List, ListItem, ListItemText, Container, Accordion, AccordionSummary, AccordionDetails, Typography, Menu, MenuItem } from '@mui/material';
+import { useState, useEffect } from 'react';
+import {
+  AppBar, Toolbar, Box, Button, IconButton, Drawer, List, ListItem, ListItemText,
+  Accordion, AccordionSummary, AccordionDetails, Typography, Menu, MenuItem, Container
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { styled } from '@mui/system';
+import { styled, useTheme } from '@mui/system';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/images/logoImg.png';
+import logo from '../../assets/images/logo-real.jpg';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
+// Styled components
 const Logo = styled('img')({
-  width: '150px',
+  width: '50px',
 });
 
 const NavMenu = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'flex-end',
+  flexGrow: 1,
   [theme.breakpoints.down('md')]: {
     display: 'none',
   },
 }));
 
 const MobileMenuButton = styled(IconButton)(({ theme }) => ({
-  display: 'none',
-  [theme.breakpoints.down('md')]: {
-    display: 'flex',
-  },
-}));
-
-const DrawerContent = styled(Box)(({ theme }) => ({
-  width: 250,
-}));
-
-const DropdownMenu = styled(Menu)(({ theme }) => ({
-  display: 'none',
   [theme.breakpoints.up('md')]: {
-    display: 'block',
+    display: 'none',
   },
 }));
 
-const StyledAccordion = styled(Accordion)(({ theme }) => ({
+const StyledAccordion = styled(Accordion)({
   boxShadow: 'none',
   backgroundColor: 'transparent',
-  '& .MuiAccordionSummary-root': {
-    backgroundColor: 'transparent',
-  },
-  '& .MuiAccordionDetails-root': {
-    backgroundColor: 'transparent',
-  },
-}));
+});
+
+const DrawerContent = styled(Box)({
+  width: 250,
+});
+
+const fontStyle = {
+  color: '#0a1023',
+};
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [headerStyle, setHeaderStyle] = useState({ background: 'transparent', backdropFilter: 'none' }); // Initial style
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+
+  const handleMenuClick = (event) => setAnchorEl(event.currentTarget);
+
+  const handleMenuClose = () => setAnchorEl(null);
+
+  const handleAccordionToggle = () => {
+    setServicesOpen((prev) => !prev);
   };
 
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleItemClick = (path) => {
+    setMobileOpen(false); // Close the drawer for mobile after selecting an item
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setHeaderStyle({
+          background: 'rgba(255, 255, 255, 1)', // Light background
+          // backdropFilter: 'blur(10px)', // Blur effect-
+        });
+      } else {
+        setHeaderStyle({
+          background: 'transparent',
+          backdropFilter: 'none',
+          boxShadow:'none'
+        });
+      }
+    };
 
-  const handleItemClick = () => {
-    handleDrawerToggle();
-  };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
+  // Drawer content for mobile
   const drawer = (
-    <DrawerContent
-      role="presentation"
-      onClick={handleDrawerToggle}
-      onKeyDown={handleDrawerToggle}
-    >
-      <List>
-        <ListItem button onClick={handleItemClick}>
+    <DrawerContent role="presentation" onClick={handleDrawerToggle}>
+      <List >
+        <ListItem button component={Link} to="/" onClick={() => handleItemClick('/')}>
           <ListItemText primary="Home" />
         </ListItem>
-        
-        {/* Loans Accordion */}
-        <StyledAccordion
-          expanded={servicesOpen}
-          onChange={() => setServicesOpen(!servicesOpen)}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-          >
+
+        {/* Services Accordion for mobile */}
+        <StyledAccordion expanded={servicesOpen} onChange={handleAccordionToggle}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} onClick={(e) => e.stopPropagation()}>
             <Typography>Loans</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <List>
-              <ListItem button onClick={handleItemClick}>
+              <ListItem button component={Link} to="/personalloan" onClick={() => { handleItemClick('/personalloan'); setServicesOpen(false); }}>
                 <ListItemText primary="Personal Loan" />
               </ListItem>
-              <ListItem button onClick={handleItemClick}>
+              <ListItem button component={Link} to="/businessloan" onClick={() => { handleItemClick('/businessloan'); setServicesOpen(false); }}>
                 <ListItemText primary="Business Loan" />
               </ListItem>
-              <ListItem button onClick={handleItemClick}>
+              <ListItem button component={Link} to="/professionalloan" onClick={() => { handleItemClick('/professionalloan'); setServicesOpen(false); }}>
                 <ListItemText primary="Professional Loan" />
               </ListItem>
-              <ListItem button onClick={handleItemClick}>
+              <ListItem button component={Link} to="/secureloan" onClick={() => { handleItemClick('/secureloan'); setServicesOpen(false); }}>
                 <ListItemText primary="Secure Loan" />
+              </ListItem>
+              <ListItem button component={Link} to="/secureloan" onClick={() => { handleItemClick('/secureloan'); setServicesOpen(false); }}>
+                <ListItemText primary="CC/OD Loan" />
+              </ListItem>
+              <ListItem button component={Link} to="/secureloan" onClick={() => { handleItemClick('/secureloan'); setServicesOpen(false); }}>
+                <ListItemText primary="Business Loan" />
+              </ListItem>
+              <ListItem button component={Link} to="/secureloan" onClick={() => { handleItemClick('/secureloan'); setServicesOpen(false); }}>
+                <ListItemText primary="Personal Loan" />
+              </ListItem>
+              <ListItem button component={Link} to="/secureloan" onClick={() => { handleItemClick('/secureloan'); setServicesOpen(false); }}>
+                <ListItemText primary="House Loan" />
               </ListItem>
             </List>
           </AccordionDetails>
         </StyledAccordion>
-        <ListItem button onClick={handleItemClick}>
-          <ListItemText primary="Cards" />
-        </ListItem>
-        <ListItem button onClick={handleItemClick}>
+
+        <ListItem button component={Link} to="/blogs" onClick={() => handleItemClick('/blogs')}>
           <ListItemText primary="Blogs" />
         </ListItem>
-        <ListItem button onClick={handleItemClick}>
+        <ListItem button component={Link} to="/news" onClick={() => handleItemClick('/news')}>
           <ListItemText primary="News" />
         </ListItem>
-        <ListItem button onClick={handleItemClick}>
+        <ListItem button component={Link} to="/contact" onClick={() => handleItemClick('/contact')}>
           <ListItemText primary="Contact" />
-        </ListItem>        
+        </ListItem>
       </List>
     </DrawerContent>
   );
 
   return (
-    <AppBar position="sticky" color='#000' elevation={0} sx={{ background:'#fff', borderBottom:'0.5px solid #e8e8e8' }}>
+    <AppBar position="sticky" sx={{ ...headerStyle, py: 2, boxShadow:'none' }} elevation={0}>
       <Container>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Logo */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Logo src={logo} alt="Logo" />
+            <Logo src={logo} alt="LoanRaasta Logo" />
           </Box>
 
-          {/* Navigation Menu for Desktop */}
-          <NavMenu>
-            <Button color="inherit" sx={{ marginRight: '20px' }}>
-              <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Home</Link>
-            </Button>
-            <Button color="inherit" sx={{ marginRight: '20px' }}>
-              <Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }}>About</Link>
-            </Button>
-
-            {/* Services Dropdown Menu */}
-            <Box sx={{ position: 'relative' }}>
-              <Button
-                color="inherit"
-                onClick={handleMenuClick}
-                endIcon={<ArrowDropDownIcon />}
-                sx={{ marginRight: '20px' }}
-              >
+          {/* Desktop Navigation */}
+          {!isMobile && (
+            <NavMenu>
+              <Button component={Link} to="/" sx={{ ...fontStyle, padding: '0 10px', }}>
+                Home
+              </Button>
+              <Button component={Link} to="/about" sx={{ ...fontStyle, padding: '0 10px', }}>
+                About
+              </Button>
+              <Button onClick={handleMenuClick} sx={{ ...fontStyle, padding: '0 10px', }} endIcon={<ArrowDropDownIcon />}>
                 Loans
               </Button>
-              <DropdownMenu
+              <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'center',
-                }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
               >
-                <MenuItem onClick={handleMenuClose}>
-                <Link to="/personalloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                MSME Loan
-                </Link>
+                <MenuItem component={Link} to="/personalloan" onClick={handleMenuClose}>
+                  MSME Loan
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                <Link to="/businessloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Project Loan
-                </Link>
+                <MenuItem component={Link} to="/businessloan" onClick={handleMenuClose}>
+                  Project Loan
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                <Link to="/professionalloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Factory Loan with subsidy
-                </Link>
+                <MenuItem component={Link} to="/professionalloan" onClick={handleMenuClose}>
+                  Factory Loan
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                CC/OD Loan
-                </Link>
+                <MenuItem component={Link} to="/secureloan" onClick={handleMenuClose}>
+                  CC/OD Loan
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Business Loan
-                </Link>
+                <MenuItem component={Link} to="/secureloan" onClick={handleMenuClose}>
+                  Business Loan
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                Personal Loan
-                </Link>
+                <MenuItem component={Link} to="/secureloan" onClick={handleMenuClose}>
+                  Personal Loan
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                <Link to="/secureloan" style={{ textDecoration: 'none', color: 'inherit' }}>
-                House Loan
-                </Link>
+                <MenuItem component={Link} to="/secureloan" onClick={handleMenuClose}>
+                  House Loan
                 </MenuItem>
-              </DropdownMenu>
-            </Box>
-
-            <Button color="inherit" sx={{ marginRight: '20px' }}>
-              <Link to="/blogs" style={{ textDecoration: 'none', color: 'inherit' }}>Blogs</Link>
-            </Button>
-
-            <Button color="inherit" sx={{ marginRight: '20px' }}>
-              <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }}>Contact</Link>
-            </Button>
-           
-          </NavMenu>
+              </Menu>
+              <Button component={Link} to="/blogs" sx={{ ...fontStyle, padding: '0 10px', }}>
+                Blogs
+              </Button>
+              <Button component={Link} to="/contact" sx={{ ...fontStyle, padding: '0 10px', }}>
+                Contact
+              </Button>
+            </NavMenu>
+          )}
 
           {/* Apply Now Button */}
-          <Button variant="contained" color="primary" sx={{ display: { xs: 'none', md: 'inline-flex' } }}>
-            Apply Now
-          </Button>
+          {!isMobile && (
+            <Button variant="contained" color="primary">
+              Apply Now
+            </Button>
+          )}
 
           {/* Mobile Menu Button */}
-          <MobileMenuButton edge="start" color="inherit" aria-label="menu" onClick={handleDrawerToggle}>
+          <MobileMenuButton edge="start" color="main.primary" onClick={handleDrawerToggle}>
             <MenuIcon />
           </MobileMenuButton>
         </Toolbar>
       </Container>
 
       {/* Mobile Drawer */}
-      <Drawer
-        anchor="right"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-      >
-        <DrawerContent
-          role="presentation"
-          onClick={(event) => event.stopPropagation()} // Prevent closing drawer on Services click
-        >
-          <List>
-            <ListItem button onClick={handleItemClick}>
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem button onClick={handleItemClick}>
-              <ListItemText primary="Loan" />
-            </ListItem>
-            <ListItem button onClick={handleItemClick}>
-              <ListItemText primary="Cards" />
-            </ListItem>
-            <ListItem button onClick={handleItemClick}>
-              <ListItemText primary="Blogs" />
-            </ListItem>
-            <ListItem button onClick={handleItemClick}>
-              <ListItemText primary="News" />
-            </ListItem>
-            <ListItem button onClick={handleItemClick}>
-              <ListItemText primary="Contact" />
-            </ListItem>
-
-            {/* Services Accordion */}
-            <StyledAccordion
-              expanded={servicesOpen}
-              onChange={() => setServicesOpen(!servicesOpen)}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <Typography>Services</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <List>
-                  <ListItem button onClick={handleItemClick}>
-                    <ListItemText primary="Item 1" />
-                  </ListItem>
-                  <ListItem button onClick={handleItemClick}>
-                    <ListItemText primary="Item 2" />
-                  </ListItem>
-                  <ListItem button onClick={handleItemClick}>
-                    <ListItemText primary="Item 3" />
-                  </ListItem>
-                  <ListItem button onClick={handleItemClick}>
-                    <ListItemText primary="Item 4" />
-                  </ListItem>
-                </List>
-              </AccordionDetails>
-            </StyledAccordion>
-          </List>
-        </DrawerContent>
+      <Drawer anchor="right" open={mobileOpen} onClose={handleDrawerToggle}>
+        {drawer}
       </Drawer>
     </AppBar>
   );

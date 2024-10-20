@@ -35,48 +35,54 @@ import blog3 from '../assets/images/Mar-Business_11.jpg'
 export const loanData = [
   {
     title: "MSME Loan",
+    description: "Financial support for micro, small, and medium enterprises.",
     image: instantImg,
     borderColor: "#F44336", // Red
     buttonColor: "error", // Refers to MUI's error color
   },
   {
     title: "Project Loan",
+    description: "Funding for various projects to ensure successful completion.",
     image: instantImg,
     borderColor: "#FF9800", // Orange
     buttonColor: "warning", // Refers to MUI's warning color
   },
   {
     title: "Factory Loan",
+    description: "Loans tailored for setting up or expanding manufacturing units.",
     image: secureImg,
     borderColor: "#9C27B0", // Purple
     buttonColor: "secondary",
   },
   {
     title: "CO/CD Loan",
+    description: "Loans for cash credit and current account overdrafts.",
     image: professionalImg,
     borderColor: "#4CAF50", // Green
     buttonColor: "success", // Refers to MUI's success color
   },
   {
     title: "Business Loan",
+    description: "Comprehensive funding solutions for all business needs.",
     image: businessImg,
     borderColor: "#2196F3", // Blue
     buttonColor: "primary", // Refers to MUI's primary color
   },  
   {
     title: "Personal Loan",
+    description: "Unsecured loans for personal expenses or emergencies.",
     image: personalImg,
     borderColor: "#FF5722", // Deep Orange
     buttonColor: "error", // Refers to MUI's error color
   },  
   {
     title: "House Loan",
+    description: "Loans to help you buy or build your dream home.",
     image: instantImg,
     borderColor: "#FFC107", // Amber
     buttonColor: "warning", // Refers to MUI's warning color
   },
 ];
-
   
   // Loan Sections Data (for the alternating loan info sections)
   export const loanSections = [
@@ -130,17 +136,17 @@ export const loanData = [
   {
     title: "2-Minute Discussion with Our Finance Expert",
     description: "Start your loan journey by having a quick 2-minute conversation with our expert. We’ll guide you through your options and recommend the best loan for your needs.",
-    icon: oneClick, // Placeholder for the icon
+    icon: oneClick, 
   },
   {
     title: "Checking of Documentation",
     description: "We thoroughly review your documents to ensure everything is in order, simplifying the process and ensuring you meet all loan criteria with ease.",
-    icon: onlineDocumentaion, // Placeholder for the icon
+    icon: onlineDocumentaion, 
   },
   {
     title: "Quick Approval & Disbursal",
     description: "Once your documents are verified, get fast approval and disbursal. You can access the loan amount within hours, straight to your account.",
-    icon: quickDisbursal, // Placeholder for the icon
+    icon: quickDisbursal, 
   },
 ];
 
