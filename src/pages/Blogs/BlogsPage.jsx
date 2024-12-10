@@ -40,10 +40,14 @@ const BlogsPage = () => {
           {/* Banner Section */}
           <Box
           sx={{
-            backgroundImage: `url(https://via.placeholder.com/1200x400)`, // Replace with actual banner image URL
+            backgroundImage: `url(https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)`, // Replace with actual banner image URL
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            height: '300px',
+            height: {
+              xs:'200px',
+              md:'300px',
+              lg:'400px'
+            },
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -107,7 +111,7 @@ const BlogsPage = () => {
               </Typography>
             </CardContent>
             <CardActions sx={{ justifyContent: "center", paddingBottom: "1rem" }}>
-              <Button size="small" color="primary">
+              <Button size="small" color="primary" sx={{ "&:hover":{ color:'#000' } }}>
                 Read More
               </Button>
             </CardActions>

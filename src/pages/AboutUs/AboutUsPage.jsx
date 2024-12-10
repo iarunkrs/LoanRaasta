@@ -8,8 +8,12 @@ const AboutUsPage = () => {
        <Box 
         sx={{ 
           position: 'relative',
-          height: '300px',
-          backgroundImage: 'url(https://via.placeholder.com/1200x300?text=LoanRaasta+Banner)',
+          height: {
+            xs:'200px',
+            md:'300px',
+            lg:'400px'
+          },
+          backgroundImage: 'url(https://images.pexels.com/photos/392018/pexels-photo-392018.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           // borderRadius: '8px',
@@ -55,9 +59,13 @@ const AboutUsPage = () => {
         variant="body1" 
         sx={{ fontFamily: 'Outfit', textAlign: 'center', marginBottom: '2rem', lineHeight: 1.8 }}
       >
-        At <strong>LoanRaasta</strong>, we are dedicated to helping individuals and businesses achieve their financial goals by providing fast, 
-        flexible, and affordable loan solutions. With years of experience in the lending industry, our team is committed to delivering exceptional 
-        service and personalized financial options for every unique need.
+        At Loanraasta.com, we are dedicated to empowering individuals and businesses with the financial tools, expertise, and guidance they need to thrive. Founded on a commitment to transparency, integrity, and customer success, we offer a wide range of financial services designed to meet the unique needs of our clients.
+      </Typography>
+      <Typography 
+        variant="body1" 
+        sx={{ fontFamily: 'Outfit', textAlign: 'center', marginBottom: '2rem', lineHeight: 1.8 }}
+      >
+       We are here to help you navigate the complex world of finance with confidence. At Loanraasta.com, we believe that financial success starts with trust, and we work tirelessly to earn yours.
       </Typography>
       
       {/* Section 2: Our Mission */}
@@ -73,10 +81,37 @@ const AboutUsPage = () => {
           variant="body1" 
           sx={{ fontFamily: 'Outfit', marginBottom: '1rem', lineHeight: 1.8 }}
         >
-          Our mission is to empower our clients with accessible and transparent lending services. We believe in simplifying the loan process, 
-          making it easier for everyone to access the financial support they need to grow, thrive, and succeed. Whether it’s securing personal loans, 
-          business funding, or debt consolidation, we are here to make your journey smooth and stress-free.
+          To provide innovative and accessible financial solutions, fostering financial security and success for all our clients.
         </Typography>
+      </Box>
+
+      {/* Section 5: Our Values */}
+      <Box sx={{ textAlign: 'center', marginBottom: '3rem' }}>
+        <Typography 
+          variant="h5" 
+          gutterBottom 
+          sx={{ fontFamily: 'Outfit', color: '#000' }}
+        >
+          Our Values
+        </Typography>
+        {/* <Typography 
+          variant="body1" 
+          sx={{ fontFamily: 'Outfit', marginBottom: '1rem', lineHeight: 1.8 }}
+        >
+          We operate on a foundation of trust, integrity, and transparency. Our core values drive everything we do:
+        </Typography> */}
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+          gap: 2, 
+          justifyContent: 'center'
+        }}>
+          <Box sx={{ textAlign: 'left', fontFamily: 'Outfit', lineHeight: 1.8 }}>
+            <Typography variant="body1" sx={{ marginBottom: '1rem' }}><strong>Integrity:</strong> We hold ourselves to the highest ethical standards, ensuring transparency in everything we do.</Typography>
+            <Typography variant="body1" sx={{ marginBottom: '1rem' }}><strong>Client-Centric:</strong> Your goals are our goals. We take a personalized approach to help you achieve your financial objectives.</Typography>
+            <Typography variant="body1" sx={{ marginBottom: '1rem' }}><strong>Excellence:</strong> We strive for excellence in service, delivering exceptional results and expert advice every time.</Typography>
+          </Box>
+        </Box>
       </Box>
 
       {/* Section 3: Why Choose Us */}
@@ -93,32 +128,31 @@ const AboutUsPage = () => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
           gap: 3, 
           justifyContent: 'center',
-          background: 'linear-gradient(to right, #a2c2e4, #e0f7ff)', 
+          background: 'linear-gradient(to right, #ffa0ab, #f2082300)', 
           padding: '2rem', 
-          borderRadius: '8px'
+          borderRadius: '0px'
         }}>
           <Box sx={{ textAlign: 'left', fontFamily: 'Outfit', lineHeight: 1.8 }}>
             <Typography variant="body1" sx={{ marginBottom: '1rem' }}>
-              <strong>Fast and Simple Applications:</strong> Our streamlined process ensures quick and hassle-free applications.
+              Experienced, knowledgeable professionals who are committed to your financial success.
             </Typography>
             <Typography variant="body1" sx={{ marginBottom: '1rem' }}>
-              <strong>Competitive Rates:</strong> Enjoy the best rates and flexible plans tailored to your needs.
+              Customized financial solutions that align with your goals and needs.
             </Typography>
             <Typography variant="body1" sx={{ marginBottom: '1rem' }}>
-              <strong>Expert Support:</strong> Receive personalized assistance from our knowledgeable team.
-            </Typography>
-            <Typography variant="body1" sx={{ marginBottom: '1rem' }}>
-              <strong>Transparent Transactions:</strong> We guarantee clear terms with no hidden fees.
-            </Typography>
-            <Typography variant="body1" sx={{ marginBottom: '1rem' }}>
-              <strong>Customer-Centric Approach:</strong> Your financial success is our priority.
+              A trusted partner dedicated to guiding you through every stage of your financial journey.
             </Typography>
           </Box>
         </Box>
+        <Typography variant="body1" sx={{ marginBottom: '2rem', mt:'1rem' }}>
+        Let us help you turn your financial aspirations into reality. Contact us today to learn how we can support your financial future.
+        </Typography>
       </Box>
 
+     
+
       {/* Section 4: Gallery */}
-      <Box sx={{ textAlign: 'center', marginBottom: '3rem' }}>
+      {/* <Box sx={{ textAlign: 'center', marginBottom: '3rem' }}>
         <Typography 
           variant="h5" 
           gutterBottom 
@@ -153,58 +187,30 @@ const AboutUsPage = () => {
             </Card>
           ))}
         </Box>
-      </Box>
+      </Box> */}
 
-      {/* Section 5: Our Values */}
-      <Box sx={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <Typography 
-          variant="h5" 
-          gutterBottom 
-          sx={{ fontFamily: 'Outfit', color: '#000' }}
-        >
-          Our Values
-        </Typography>
-        <Typography 
-          variant="body1" 
-          sx={{ fontFamily: 'Outfit', marginBottom: '1rem', lineHeight: 1.8 }}
-        >
-          We operate on a foundation of trust, integrity, and transparency. Our core values drive everything we do:
-        </Typography>
-        <Box sx={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-          gap: 2, 
-          justifyContent: 'center'
-        }}>
-          <Box sx={{ textAlign: 'left', fontFamily: 'Outfit', lineHeight: 1.8 }}>
-            <Typography variant="body1" sx={{ marginBottom: '1rem' }}><strong>Integrity:</strong> We believe in honest communication and ethical practices.</Typography>
-            <Typography variant="body1" sx={{ marginBottom: '1rem' }}><strong>Transparency:</strong> We ensure full disclosure of terms and conditions, leaving no room for confusion.</Typography>
-            <Typography variant="body1" sx={{ marginBottom: '1rem' }}><strong>Customer-first:</strong> Your needs are our priority, and we aim to offer solutions tailored to your specific financial situation.</Typography>
-            <Typography variant="body1" sx={{ marginBottom: '1rem' }}><strong>Innovation:</strong> We continuously improve our processes and services to make lending easier and more efficient for you.</Typography>
-          </Box>
-        </Box>
-      </Box>
+      
 
       {/* Section 6: Call to Action */}
       <Box 
         sx={{ 
           textAlign: 'center', 
           padding: '2rem', 
-          backgroundColor: '#e0f7ff', 
-          borderRadius: '8px', 
+          background: '#f20823', 
+          borderRadius: '0px', 
           marginTop: '2rem' 
         }}
       >
         <Typography 
           variant="h5" 
           gutterBottom 
-          sx={{ fontFamily: 'Outfit', color: '#000' }}
+          sx={{ fontFamily: 'Outfit', color: '#fff' }}
         >
           Ready to Take the Next Step?
         </Typography>
         <Typography 
           variant="body1" 
-          sx={{ fontFamily: 'Outfit', marginBottom: '1rem', lineHeight: 1.8 }}
+          sx={{ fontFamily: 'Outfit', marginBottom: '1rem', lineHeight: 1.8, color: '#fff' }}
         >
           Whether you're seeking financial support for personal growth or business expansion, we're here to help. 
           Contact us today to get started with your loan application or learn more about our services.

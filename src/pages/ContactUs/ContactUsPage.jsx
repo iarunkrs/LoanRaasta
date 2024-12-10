@@ -1,6 +1,7 @@
 // src/pages/ContactPage.js
 import React from 'react';
 import { Box, Typography, TextField, Button, Container, Avatar } from '@mui/material';
+import logoImg from '../../assets/images/logo-real.jpg'
 
 const ContactUsPage = () => {
   return (
@@ -16,7 +17,7 @@ const ContactUsPage = () => {
     }}
   >
     <img
-      src="https://via.placeholder.com/1200x400"
+      src="https://images.pexels.com/photos/821754/pexels-photo-821754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       alt="Contact Banner"
       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
     />
@@ -45,7 +46,7 @@ const ContactUsPage = () => {
       <Box sx={{ padding: '4rem 2rem' }}>
         {/* Header Section */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#6d72f6' }} gutterBottom>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }} gutterBottom>
             Contact Us
           </Typography>
           <Typography variant="body1" sx={{ mb: 2, color: '#333' }}>
@@ -74,8 +75,9 @@ const ContactUsPage = () => {
               alignItems: 'center',
             }}
           >
-            <Avatar
-              src="https://via.placeholder.com/100"
+            <Box
+            component={'img'}
+              src={logoImg}
               alt="Contact"
               sx={{ width: 100, height: 100, mb: 2 }}
             />
@@ -85,8 +87,8 @@ const ContactUsPage = () => {
             <Typography variant="body1" sx={{ mb: 3, textAlign: 'center' }}>
               Our team is here to help you with any questions you may have. Reach out to us through any of the following methods:
             </Typography>
-            <Typography variant="body1" sx={{ mb: 1 }}>
-              <strong>Email:</strong> <a href="mailto:contact@loanraasta.com">contact@loanraasta.com</a>
+            <Typography variant="body1" sx={{ mb: 1, }}>
+              <strong>Email:</strong> <a href="mailto:contact@loanraasta.com" style={{ color:'red !important' }}>contact@loanraasta.com</a>
             </Typography>
             <Typography variant="body1" sx={{ mb: 1 }}>
               <strong>Phone:</strong> +1-800-LOAN-RASTA
