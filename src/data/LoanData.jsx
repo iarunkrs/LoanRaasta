@@ -90,43 +90,43 @@ export const loanData = [
       title: "MSME Loan",
       paragraph:
         "Empower your small or medium-sized enterprise with our MSME Loan. Whether you need funding for business expansion, working capital, or new equipment, we provide customized financial solutions tailored to the specific needs of MSMEs. Enjoy low interest rates, flexible repayment options, and fast processing to help your business grow without hassle.",
-      image: business, // Assuming MSME loan uses the same image
+      image: "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Assuming MSME loan uses the same image
     },
     {
       title: "Project Loan",
       paragraph:
         "Secure financing for your large-scale projects with our Project Loan. Ideal for infrastructure development, construction projects, or new business ventures, our project loan offers long-term repayment plans, lower interest rates, and specialized financing structures. Let us help you turn your ambitious projects into reality with a tailored approach to funding.",
-      image: business, // Assuming Project Loan uses the same image
+      image: "https://cdn.pixabay.com/photo/2018/05/18/16/04/payment-3411414_1280.jpg", // Assuming Project Loan uses the same image
     },
     {
-      title: "Factory Loan",
+      title: "Overdraft Loan",
       paragraph:
-        "Upgrade or expand your manufacturing facility with our Factory Loan. Whether you’re looking to purchase new machinery, expand your production capacity, or optimize your supply chain, our loan solutions provide flexible repayment options and competitive interest rates. Benefit from our specialized loan offerings to grow your factory operations and stay ahead in the industry.",
-      image: business, // Updated to match the loan type
+        "An Overdraft Loan from our platform provides a reliable and flexible solution to meet your immediate financial needs. It allows you to withdraw funds exceeding your account balance up to a predefined limit, ensuring uninterrupted cash flow. Interest is charged only on the utilized amount, making it a cost-effective choice. Ideal for handling unexpected expenses, managing working capital, or bridging financial gaps, our Overdraft Loan is designed to offer you peace of mind and financial stability.",
+      image: "https://cdn.pixabay.com/photo/2018/08/17/14/26/piggy-3612928_1280.jpg", // Updated to match the loan type
     },
     {
       title: "CO/CD Loan",
       paragraph:
         "Our Construction and Development (CO/CD) Loan is designed to provide comprehensive financing for property development, real estate projects, or large-scale infrastructure. With flexible loan terms, competitive rates, and a focus on funding large construction or development projects, we support your vision to build, develop, or expand real estate ventures. Let our financial solutions drive your success.",
-      image: business, // Updated to match the loan type
+      image: "https://cdn.pixabay.com/photo/2024/01/13/09/18/coins-8505363_1280.jpg", // Updated to match the loan type
     },
     {
       title: "Business Loan",
       paragraph:
         "Expand your business, launch new projects, or manage your cash flow with our Business Loan solutions. We offer flexible loan terms to support both small and large businesses, whether you're investing in equipment, expanding operations, or funding a new initiative. Our business loans are designed with competitive interest rates and quick processing to ensure your business stays agile.",
-      image: business, // Same as original
+      image: "https://images.pexels.com/photos/4968630/pexels-photo-4968630.jpeg?auto=compress&cs=tinysrgb&w=600", // Same as original
     },
     {
       title: "Personal Loan",
       paragraph:
         "Need funds for personal financial needs? Our Personal Loan is here to offer you quick access to funds for medical expenses, vacations, education, or other personal needs. With flexible repayment terms and competitive interest rates, we provide a hassle-free solution for your immediate financial requirements. No collateral required and easy documentation for fast approval.",
-      image: business, // Same as original
+      image: "https://images.pexels.com/photos/6801644/pexels-photo-6801644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Same as original
     },
     {
       title: "House Loan",
       paragraph:
         "Achieve your dream of owning a home with our House Loan. Whether you're purchasing a new home, refinancing an existing mortgage, or building your dream house, we offer flexible repayment options, competitive interest rates, and easy approval processes. Enjoy long-term repayment plans that suit your financial situation, and take the first step toward your dream home today.",
-      image: business, // Assuming the same image for House Loan
+      image: "https://images.pexels.com/photos/7579361/pexels-photo-7579361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Assuming the same image for House Loan
     },
   ];
   
